@@ -1,0 +1,19 @@
+\documentclass[main]{subfiles}
+\begin{document}
+\pagestyle{myheadings} %use this untuk menghilangkan header chapter
+\chapter{TINJAUAN PUSTAKA}
+
+\section{Prinsip Kerja Sistem}
+Berdasarkan rumusan masalah yang telah dipaparkan pada bab 1, berikut adalah konsep prinsip kerja sistem yang dicanangkan:
+\begin{enumerate}
+	\item Terdapat 2 drone dan 1 \textit{Base Station} (BS), masing-masing menggunakan mikrokontroler ESP32 sebagai \textit{Communications Module} (CM) yang berkomunikasi satu sama lain menggunakan \textit{User Datagram Protocol} (UDP) pada jaringan 802.11 Ad-Hoc.
+	\item CM Drone \textit{Victim Finder} (VF) menerima sinyal dari darat melalui \textit{remote control} dari BS yang berisikan sinyal \textit{trigger} melalui UDP.
+	\item CM Drone VF mengaktifkan modul GPS dan mendata koordinat lokasi, ketinggian terbang drone, dan status baterai drone.
+	\item CM mengirimkan data melalui UDP \textit{Multi-cast} kepada drone kedua dan BS.
+	\item \textit{*Hapus jika tidak diimplementasikan langsung*} Drone 2 menerima data lokasi dari drone 1, kemudian menggunakan CM untuk mengendalikan drone menggunakan Tello SDK.
+\end{enumerate}
+
+\end{document}
+
+%pengujian di gd N, ujung ke ujung, dari sama tinggi ke beda tinggi
+%bahas bab2 termasuk UAV, UDP, 802.11, OSI Layer, ESP32

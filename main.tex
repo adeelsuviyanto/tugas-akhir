@@ -1,0 +1,156 @@
+%File Main, isinya lembar pengesahan dan judul, buat yang lain ada di file tex lainnya
+\documentclass[12pt,a4paper,oneside]{book}
+\usepackage[utf8]{inputenc}
+%set margin 4cm kiri, 3 cm sisa
+\usepackage[a4paper, lmargin=4cm, rmargin=3cm, tmargin=3cm, bmargin=3cm]{geometry}
+
+%packages
+\usepackage[indonesian]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fontenc}
+\usepackage{mathptmx} %Times New Roman
+\usepackage{blindtext}
+\usepackage{titlesec}
+\usepackage[backend=biber,style=ieee]{biblatex} %Bibliography pakai Biber
+\usepackage{csquotes}
+\usepackage{fancyhdr}
+\usepackage{caption} %Caption gambar dan tabel
+\usepackage{subfiles} %Penyambung antar file
+
+%set line spacing ke 1.5
+\renewcommand{\baselinestretch}{1.5}
+
+%set biblatex file
+\addbibresource{ta.bib}
+
+%set author dan judul internal
+\author{Muhammad Adeel Mahdi Suviyanto}
+\title{Pengembangan Algoritma Komunikasi Antar-Unmanned Aerial Vehicle}
+
+%remove header
+%\fancypagestyle{plain}{
+%	\lhead{}
+%	\fancyhead[R]{\thepage}
+%	\fancyhead[L]{}
+%	\renewcommand{\headrulewidth}{0pt}
+%	\fancyfoot{}
+%}
+%\pagestyle{fancy}
+%\fancyhead[R]{\thepage}
+%\fancyhead[L]{}
+%\renewcommand{\headrulewidth}{0pt}
+%\fancyfoot{}
+
+
+%setup chapter style
+\titleformat{\chapter}[display]{\bfseries\large\centering}{BAB \thechapter}{1pt}{}[]
+\titlespacing*{\chapter}{0pt}{-50pt}{1.5pt}
+%setup section style
+\titleformat{\section}[hang]{\bfseries\normalsize}{\thesection \ }{1pt}{}[]
+\titlespacing*{\section}{0pt}{0pt}{1.5pt}
+
+%Macros buat proposal gw
+\newcommand{\judul}{Pengembangan Algoritma Komunikasi Antar-Unmanned Aerial Vehicle}
+\newcommand{\judulcaps}{PENGEMBANGAN ALGORITMA KOMUNIKASI ANTAR-UNMANNED AERIAL VEHICLE}
+\newcommand{\juduleng}{Development of an Inter-Unmanned Aerial Vehicle Communications Algorithm}
+\newcommand{\judulengcaps}{DEVELOPMENT OF AN INTER-UNMANNED AERIAL VEHICLE COMMUNICATIONS ALGORITHM}
+\newcommand{\prodi}{S1 Teknik Elektro}
+\newcommand{\fakultas}{Fakultas Teknik Elektro}
+\newcommand{\universitas}{Universitas Telkom}
+\newcommand{\nama}{Muhammad Adeel Mahdi Suviyanto}
+\newcommand{\nim}{1102183191}
+\newcommand{\NAMA}{MUHAMMAD ADEEL MAHDI SUVIYANTO}
+
+%start document dari sini
+\begin{document}
+\frontmatter %sebelum bab I, numbering pake nomor romawi
+%disini buat centering document dari atas sampe bawah di halaman pengesahan dan judul
+%start halaman pengesahan
+%\textbf{LEMBAR PENGESAHAN}
+\chapter*{LEMBAR PENGESAHAN} %Lembar Pengesahan sebagai Chapter
+
+\begin{center} %2 halaman pertama all pake center
+\thispagestyle{empty}
+\large
+\textbf{PROPOSAL TUGAS AKHIR}
+\bigskip
+
+\Large
+\textbf{\judulcaps}
+\bigskip
+
+\textbf{\textit{\judulengcaps}}
+\bigskip
+\bigskip
+\bigskip
+
+\normalsize
+\textbf{Telah disetujui dan disahkan sebagai Proposal Tugas Akhir}\\
+\textbf{Program Studi \prodi}\\
+\textbf{\fakultas}\\
+\textbf{\universitas}\\
+\bigskip
+\bigskip
+
+\textbf{Disusun oleh:}\\
+\textbf{\NAMA}\\
+\textbf{\nim}\\
+\bigskip
+\bigskip
+
+\textbf{Bandung, x Desember 2021}\\
+\begin{tabular}{|c|c|}
+\hline
+Pembimbing 1 & Pembimbing 2 \\
+Nama & Nama \\
+\hline
+\end{tabular}
+
+%start halaman judul
+\newpage
+\thispagestyle{empty}
+\Large
+\textbf{\judulcaps}
+\bigskip
+\large
+\textit{\textbf{{(\judulengcaps)}}}\\
+\bigskip
+\bigskip
+\textbf{PROPOSAL TUGAS AKHIR}
+
+\normalsize
+Disusun sebagai syarat mata kuliah Penyusunan Karya Ilmiah dan Proposal\\
+Di Program Studi \prodi
+
+\bigskip
+Disusun oleh:\\
+\textbf{\NAMA}\\
+\textbf{\nim}\\
+\bigskip
+\bigskip
+\bigskip
+\includegraphics[scale=0.33]{logotelu}
+\vfill
+\Large
+\textbf{FAKULTAS TEKNIK ELEKTRO}\\
+\large
+\textbf{UNIVERSITAS TELKOM}\\
+\textbf{BANDUNG}\\
+\textbf{2021}
+\end{center} %akhir dari center, mulai dari sini pake subfile
+
+\pagestyle{myheadings}
+%section file lain
+\subfile{abstrak}
+\subfile{daftarisi}
+\subfile{daftargambar}
+\subfile{daftartabel}
+\mainmatter
+\subfile{bab1}
+\subfile{bab2}
+\printbibliography[title={DAFTAR PUSTAKA}]
+
+\end{document}

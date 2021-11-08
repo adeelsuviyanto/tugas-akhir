@@ -1,0 +1,113 @@
+%!TeX root = bab1
+\documentclass[main]{subfiles}
+\begin{document}
+\pagestyle{myheadings} %use this untuk menghilangkan header chapter
+
+\chapter{PENDAHULUAN}
+\section{Latar Belakang Masalah}
+Salah satu faktor penentu kesuksesan dalam operasi \textit{Search and Rescue} (SAR) pada bencana alam adalah kecepatan dalam menemukan lokasi dan posisi korban serta pengiriman logistik bantuan penunjang hidup bagi korban tersebut. Namun, kondisi daratan medan bencana alam yang sukar dilewati oleh tim penyelamat dapat menyebabkan lamanya kedua proses tersebut, menurunkan probabilitas keselamatan bagi korban \cite{syafitriAutonomousDisasterVictim2020}. Pada saat ini, metode yang biasa digunakan untuk pencarian korban adalah menggunakan helikopter dengan pencarian manual dari udara. Akan tetapi, penggunaan helikopter memiliki kelemahan pada sisi biaya operasi serta perubahan cuaca, dimana penerbangan helikopter yang aman hanya dapat dilakukan pada kondisi cuaca cerah tidak berkabut \cite{shimanskiRisksMountainRescue2008}. Oleh karena itu, penggunaan \textit{Unmanned Aerial Vehicles} (UAV) untuk kepentingan SAR dapat meningkat sebagai pendukung terhadap penggunaan helikopter pada operasi SAR.
+
+Menurut (Lakshmi Narayanan, 2015), UAV adalah sebuah tipe pesawat terbang yang dapat mengudara tanpa adanya awak di atas kapal \cite{lakshminarayananJointNetworkDisaster2015}. Terdapat berbagai kegunaan sebuah UAV, salah satunya adalah operasi SAR. UAV memiliki keunggulan yang cocok bagi operasi SAR, yakni kemampuannya untuk melihat suatu area yang luas dengan akses yang cepat tanpa terhalang oleh medan bencana \cite{DronesSearchRescue}. Pada lokasi bencana alam, akses medan bencana yang sulit dapat mempersulit operasi SAR, terutama pada pencarian korban dan pengiriman bantuan. Oleh karena itu, penelitian ini mengusulkan suatu pengembangan pada sistem komunikasi antar-UAV yang kemudian dapat digunakan pada operasi SAR.
+
+Diperlukan koordinasi antar-UAV untuk meningkatkan efisiensi dari sistem komunikasi antar-UAV yang diusulkan, oleh karena itu diperlukan sebuah sistem komunikasi antar-UAV dengan kriteria sebagai berikut:
+
+\begin{center}
+	\captionof{table}{Kriteria desain sistem.}
+	\begin{tabular}{|c|c|}
+		\hline
+		\textit{Bandwidth} & $\geq$ 64 kbps \\
+		\hline
+		\textit{Packet Loss} & $<$ 25\% \\
+		\hline
+		\textit{Range} &  $\geq$ 500 m\\
+		\hline
+	\end{tabular}
+\end{center}
+
+Terdapat beberapa arsitektur komunikasi yang layak untuk penggunaan pada komunikasi antar-UAV, seperti \textit{Flying Ad-Hoc Network} (FANET) \cite{khanFlyingAdhocNetworks2017} dan \textit{Centralized} berbasis teknologi seluler (LTE, 5G) \cite{linSkyNotLimit2018}. Namun, ketergantungan teknologi seluler terhadap infrastruktur yang telah ada di darat membuat komunikasi berbasis seluler kurang sesuai jika digunakan untuk kondisi bencana, karena rusaknya infrastruktur fisik (menara \textit{Base Transceiver Station} (BTS)), disrupsi pada infrastruktur penunjang (listrik), dan juga \textit{overload} oleh melonjaknya jumlah pengguna jaringan di waktu yang bersamaan  \cite{townsendTelecommunicationsInfrastructureDisasters2005}. Oleh karena itu, penulis akan menggunakan teknologi FANET berbasis IEEE 802.11n WiFi dengan mikrokontroler ESP32.
+
+ESP32 adalah sebuah mikrokontroler \textit{low cost} dengan kapabilitas WiFi \textit{built-in}. ESP32 dapat diprogram menggunakan Arduino IDE. Masing-masing unit \textit{drone} menggunakan \textit{board} ESP32 yang kemudian akan berkomunikasi satu sama lain menggunakan mode WiFi Ad-hoc.
+
+Berdasarkan latar belakang permasalahan di atas, penulis akan merancang sebuah algoritma komunikasi antar-UAV menggunakan teknologi FANET berbasis ESP32, dengan harapan hasil yang bisa diperoleh dapat dijadikan salah satu metode komunikasi antar-UAV pada kegunaan operasi SAR dalam menemukan titik lokasi koordinat dari posisi korban.
+\newline
+
+\section{Rumusan Masalah}
+Rumusan masalah dari penelitian ini adalah sebagai berikut:
+\begin{enumerate}
+	\item Bagaimana hasil \textit{link quality} pada jaringan yang telah diimplementasikan?
+	\item Bagaiamana korelasi antara jarak antar-UAV terhadap \textit{link quality} pada jaringan yang telah diimplementasikan?
+	\item Apakah algoritma komunikasi yang dihasilkan dapat diimplementasikan di lokasi medan bencana alam?
+\end{enumerate}
+
+\section{Tujuan dan Manfaat}
+Tujuan dari perancangan algoritma komunikasi antar-UAV ini adalah:
+\begin{enumerate}
+	\item Mengetahui \textit{link quality} jaringan yang dapat diimplementasikan.
+	\item Mengetahui apakah algoritma yang dihasilkan berguna untuk operasi SAR pada bencana alam.
+	\item Mengetahui dampak pemilihan frekuensi terhadap jarak maksimum antar-UAV dan \textit{link quality} jaringan.
+\end{enumerate}
+Adapun manfaat dari penelitian ini adalah:
+\begin{enumerate}
+	\item Mengembangkan sebuah algoritma komunikasi antar-UAV yang cukup handal dengan \textit{link quality} tinggi sehingga UAV dapat berkomunikasi satu sama lain untuk mengirimkan data.
+	\item Sebagai tahap pertama dari pengembangan sistem UAV SAR otonom.
+	\item Sebagai sumber pustaka bagi penelitian di masa depan mengenai permasalahan terkait.
+\end{enumerate}
+
+\section{Batasan Masalah}
+Agar pembahasan dalam penelitian dapat difokuskan, maka terdapat pembatasan masalah sebagai berikut:
+\begin{enumerate}
+	\item Menggunakan 2 unit drone dengan satu \textit{Base Station} (BS) untuk menyederhanakan sistem rancangan.
+	\item Data komunikasi antar-UAV yang dikirimkan berupa data koordinat (Lintang dan Bujur) dengan 5 angka desimal untuk tingkat kepresisian 1 meter \cite{PrecisionCoordinatesOpenStreetMap}.
+	\item Kendali masing-masing drone dilakukan secara terpisah dari sistem komunikasi yang diuji dan dilakukan secara manual oleh operator menggunakan \textit{remote control} (R/C).
+	\item Parameter yang digunakan pada analisis algoritma jaringan yang diimplementasikan adalah \textit{bandwidth} jaringan, \textit{packet loss}, dan \textit{signal-to-noise ratio}.
+	\item Pengujian dilakukan dengan jarak antar-UAV 20 meter, 50 meter, dan 100 meter, dengan ketinggian 30 meter.
+\end{enumerate}
+
+\section{Metode Penelitian}
+Metode penelitian yang digunakan pada tugas akhir ini antara lain:
+\begin{enumerate}
+	\item Studi Literatur
+	
+	Studi literatur dilakukan dengan mempelajari beberapa materi yang berkaitan dengan penelitian ini, dengan sumber yang digunakan berupa jurnal, artikel, buku, dan situs web yang terpercaya.
+	\item Perancangan Sistem
+	
+	Pada tahap ini, dilakukan perancangan sistem sesuai dengan target yang telah ditentukan. Melalui perancangan sistem, dihasilkan suatu gambaran jelas mengenai struktur penyusunan sistem dan dapat dilakukan analisis secara matematis.
+	\item Implementasi
+	
+	Sistem yang telah dirancang kemudian diimplementasikan melalui perangkaian komponen-komponen yang telah ditentukan, serta melakukan pemrograman sistem tersebut.
+	\item Pengujian
+	
+	Pada tahap ini, sistem yang telah diimplementasikan diuji melalui beberapa tes yang menguji sistemnya secara kuantitatif untuk menghasilkan data yang dapat diolah dalam bentuk grafik.
+	\item Analisis Hasil Pengujian
+	
+	Hasil pengujian kemudian dianalisis berdasarkan teori yang telah dikemukakan, dan menghitung faktor-faktor lainnya seperti keakuratan alat pengukur dan faktor-faktor eksternal yang mempengaruhi kinerja sistem.
+	\item Penyusunan Laporan Proposal Tugas Akhir
+	
+	Dari keseluruhan proses kemudian disusun suatu laporan Proposal Tugas Akhir.
+\end{enumerate}
+
+\section{Jadwal Pelaksanaan}
+Berikut adalah jadwal pelaksanaan penelitian ini, rincian waktu dan \textit{milestone} dirangkum dalam tabel di bawah ini:
+
+\begin{center}
+	\captionof{table}{Jadwal pelaksanaan penelitian.}
+	\begin{tabular}{|p{1cm}|p{4cm}|p{2cm}|p{2cm}|p{4cm}|}
+		\hline
+		\textbf{No.} & \textbf{Deskripsi Tahapan} & \textbf{Durasi} & \textbf{Tanggal Selesai} & \textbf{\textit{Milestone}} \\
+		\hline
+		1 & Rumusan masalah dan studi literatur & 2 Minggu & 21 Oktober 2021 & Mengidentifikasi permasalahan dan studi literatur. \\
+		\hline
+		2 & Desain sistem & 2 Minggu & 29 Oktober 2021 & Diagram blok sistem, sketsa dasar sistem, diagram alur sistem, dan spesifikasi alat. \\
+		\hline
+		3 & Pemilihan komponen & 1 Minggu & 5 November 2021 & Pendataan komponen sistem yang akan digunakan. \\
+		\hline
+		4 & Perancangan dan pembuatan sistem & 1 Bulan & 3 Desember 2021 & Implementasi sistem secara fisik. \\
+		\hline
+		5 & Pengujian sistem & 1 Minggu & 10 Desember 2021 & \textit{Test flight} dan pengujian jaringan sistem. \\
+		\hline
+		6 & Penyusunan Laporan/Buku TA & 1 Bulan 2 Minggu & 21 Januari 2022 & Laporan/Buku TA selesai. \\
+		\hline
+	\end{tabular}
+\end{center}
+
+\end{document}
